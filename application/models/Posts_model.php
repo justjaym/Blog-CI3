@@ -37,11 +37,11 @@ class Posts_model extends CI_Model{
 
     public function get_posts_edit($param){
         // $this->db->query('SELECT * FROM `post` as p JOIN `user` as u ON `u`.`id` = `p`.`id` WHERE `slug` = "$param"');
+        $this->db->select('*');
+        $this->db->from('post p');
+        $this->db->join('user u', 'u.id = p.user_id');
         $this->db->where('slug', $param);
-        // $this->db->select('*');
-        // $this->db->from('post');
-        // $this->db->join('user', 'u.id = p.id');
-        $result = $this->db->get('post');
+        $result = $this->db->get();
         // $result2 = $this->db->get('user');
 
         return $result->row_array();

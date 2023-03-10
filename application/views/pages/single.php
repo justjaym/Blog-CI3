@@ -2,8 +2,8 @@
 <hr>
 <p><?= $body; ?></p>
 <br>
-<p>Date published : <?= $date; ?></p>
-<p>Created by : <?= $user_id; ?></p>
+<p>Date published : <?= $date_published; ?></p>
+<p>Created by : <?= $first_name . ' ' . $last_name ; ?></p>
 <?php if($this->session->logged_in == true && $this->session->access == 1){ ?>
 <div class="btn-group ">
     <a href="edit/<?= $id ?>" class="btn btn-primary ">Edit</a>

@@ -30,18 +30,20 @@ class Pages extends CI_Controller {
 					show_404();
 			}
 
-			$data['posts'] = $this->Posts_model->get_posts_edit($param);
-			$data['title'] = $data['posts']['title'];
-			$data['body'] = $data['posts']['body'];
-			$data['date'] = $data['posts']['date_published'];
-			$data['id'] = $data['posts']['id'];
-			$data['user_id'] = $data['posts']['user_id'];
+			$data = $this->Posts_model->get_posts_edit($param);
+			// print_r($data);
+			// echo "<pre>";
+			// $data['title'] = $data['posts']['title'];
+			// $data['body'] = $data['posts']['body'];
+			// $data['date'] = $data['posts']['date_published'];
+			// $data['id'] = $data['posts']['id'];
+			// $data['user_id'] = $data['posts']['user_id'];
 			// $data['first_name'] = $data['posts']['user_id'];
 			
 
 
 			// print_r($data);
-			if($data['posts']){
+			if($data){
 				$this->load->view('templates/header');
 				$this->load->view('pages/'.$page, $data);
 				$this->load->view('templates/modal');
