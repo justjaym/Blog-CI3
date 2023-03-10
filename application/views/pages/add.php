@@ -14,7 +14,7 @@
         <div class="form-group">
             <textarea name="body" id="" cols="30" rows="5" class="form-control" placeholder="Enter post details" value=""><?= set_value('body');?></textarea>
         </div>
-
+        <input type="hidden" name="user_id" value="<?= $this->session->id; ?>">
         <button type="submit" name="submit" class="btn btn-success mt-2">Submit</button>
     </div>
 

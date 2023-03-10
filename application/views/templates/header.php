@@ -22,17 +22,20 @@
         <li class="nav-item active">
           <a class="nav-link" href="<?= base_url()?>">Home <span class="sr-only"></span></a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="add">Add new post</a>
-        </li>
         <?php if($this->session->logged_in){?>
-        <li class="nav-item">
-          <a class="nav-link " href="<?= base_url()?>logout" tabindex="-1" aria-disabled="true">Log out</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#" disabled><b><?= ucfirst($this->session->full_name) ?></b></a>
-        </li>
-        <?php }else {?>
+          <li class="nav-item">
+            <a class="nav-link" href="add">Add new post</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link " href="<?= base_url()?>logout" tabindex="-1" aria-disabled="true">Log out</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" disabled><b><?= $this->session->full_name ?></b></a>
+          </li>
+          <?php }else {?>
+            <li class="nav-item active">
+              <a class="nav-link" href="<?= base_url()?>register">Register <span class="sr-only"></span></a>
+            </li>
           <li class="nav-item">
           <a class="nav-link " href="<?= base_url()?>login" tabindex="-1" aria-disabled="true">Log in</a>
         </li>

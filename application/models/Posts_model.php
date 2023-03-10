@@ -9,7 +9,7 @@ class Posts_model extends CI_Model{
     }
 
     public function get_posts(){
-
+        // $this->db->query('SELECT * FROM `post` as p JOIN `user` as u ON `u`.`id` = `p`.`id` WHERE `slug` = "$param"');
         $query = $this->db->get('post');
         return $query->result_array();
 
@@ -25,6 +25,7 @@ class Posts_model extends CI_Model{
 
 
     public function get_posts_single($param){
+        // $this->db->query('SELECT * FROM `post` as p JOIN `user` as u ON `u`.`id` = `p`.`id` WHERE `slug` = "$param"');
 
         $this->db->where('id', $param);
         $result = $this->db->get('post');
@@ -35,18 +36,36 @@ class Posts_model extends CI_Model{
     }
 
     public function get_posts_edit($param){
-
+        // $this->db->query('SELECT * FROM `post` as p JOIN `user` as u ON `u`.`id` = `p`.`id` WHERE `slug` = "$param"');
         $this->db->where('slug', $param);
+        // $this->db->select('*');
+        // $this->db->from('post');
+        // $this->db->join('user', 'u.id = p.id');
         $result = $this->db->get('post');
+        // $result2 = $this->db->get('user');
 
         return $result->row_array();
+        // return $result2->row_array();
 
 
     }
 
-    public function insert_post(){
-        
+    public function register_user(){
+
         $data = array(
+            'first_name' => $this->input->post('first_name'),
+            'last_name' => $this->input->post('last_name'),
+            'email' => $this->input->post('username'),
+            'password' => $this->input->post('password'),
+            'is_admin' => $this->input->post('is_admin')
+        );
+        return $this->db->insert('user', $data);
+    }
+
+    public function insert_post(){
+        $id = $this->session->id;
+        $data = array(
+            'user_id' => $this->input->post('user_id'),
             'title' => $this->input->post('title'),
             'slug' => url_title($this->input->post('title'), '-', true),
             'body' => $this->input->post('body')

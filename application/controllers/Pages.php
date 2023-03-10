@@ -35,6 +35,10 @@ class Pages extends CI_Controller {
 			$data['body'] = $data['posts']['body'];
 			$data['date'] = $data['posts']['date_published'];
 			$data['id'] = $data['posts']['id'];
+			$data['user_id'] = $data['posts']['user_id'];
+			// $data['first_name'] = $data['posts']['user_id'];
+			
+
 
 			// print_r($data);
 			if($data['posts']){
@@ -53,7 +57,6 @@ class Pages extends CI_Controller {
 
 	public function search(){
 
-
 		$page = "home";
 		$param = $this->input->post('search');
 		if(!file_exists(APPPATH.'views/pages/'.$page.'.php')){
@@ -67,7 +70,7 @@ class Pages extends CI_Controller {
 		$this->load->view('pages/'.$page, $data);
 		$this->load->view('templates/footer');
 	}
-	
+
 	public function login(){
 
 		$this->form_validation->set_error_delimiters('<div class="alert alert-danger">','</div>');
@@ -91,7 +94,7 @@ class Pages extends CI_Controller {
 			if($user_id){
 
 				$user_data = array(
-
+					'id' => $user_id['id'],
 					'first_name' => $user_id['first_name'],
 					'last_name' => $user_id['last_name'],
 					'full_name' => ucfirst($user_id['first_name']) . ' ' . ucfirst($user_id['last_name']),
@@ -127,6 +130,32 @@ class Pages extends CI_Controller {
 		redirect('login');
 	}
 
+	public function register(){
+		
+		$this->form_validation->set_error_delimiters('<div class="alert alert-danger">','</div>');
+		$this->form_validation->set_rules('first_name', 'First Name', 'required');
+		$this->form_validation->set_rules('last_name', 'Last Name', 'required');
+		$this->form_validation->set_rules('username', 'Email', 'required');
+		$this->form_validation->set_rules('password', 'Password', 'required');
+
+		if ($this->form_validation->run() == FALSE) {
+
+			$page = "register";
+
+			if(!file_exists(APPPATH.'views/pages/'.$page.'.php')){
+					show_404();
+			}
+			$this->load->view('templates/header');
+			$this->load->view('pages/'.$page);
+			$this->load->view('templates/footer');
+		}else {
+			
+			$this->Posts_model->register_user();
+			$this->session->set_flashdata('register_user','You have succesfully created an account!');
+			redirect('login');
+		}
+
+	}
 
 	public function add(){
 
@@ -148,7 +177,6 @@ class Pages extends CI_Controller {
 			$this->load->view('pages/'.$page, $data);
 			$this->load->view('templates/footer');
 		}else {
-			
 			$this->Posts_model->insert_post();
 			$this->session->set_flashdata('post_added','New post was added');
 			redirect(base_url());

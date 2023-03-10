@@ -1,5 +1,8 @@
 <h1>Login User</h1>
 <hr>
+<?php if($this->session->flashdata('register_user')) : ?>
+    <?= '<p class="alert alert-success">'.$this->session->flashdata('register_user').'</p>';?>
+<?php endif; ?>
 <?php if($this->session->flashdata('failed_login')) : ?>
     <?= '<p class="alert alert-danger">'.$this->session->flashdata('failed_login').'</p>';?>
 <?php endif; ?>
