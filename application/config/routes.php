@@ -5,6 +5,8 @@ $route['login'] = 'pages/login';
 $route['register'] = 'pages/register';
 $route['logout'] = 'pages/logout';
 
+$route['posts'] = 'api/posts';
+
 $route['add'] = 'pages/add';
 $route['edit/(:any)'] = 'pages/edit/$1';
 $route['delete'] = 'pages/delete';
